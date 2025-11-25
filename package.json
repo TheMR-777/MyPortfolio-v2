@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://themr-777.github.io/v2",
+  "homepage": "https://themr-777.github.io/MyPortfolio-v2",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
