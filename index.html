@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Ammar Khan | Architect & Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+              cyber: ['Rajdhani', 'sans-serif'],
+              display: ['Orbitron', 'sans-serif'],
+            },
+            colors: {
+              background: '#050505',
+              surface: '#0f0f0f',
+              primary: '#d4d4d4',
+              secondary: '#737373',
+              accent: '#3b82f6', // Subtle blue for tech
+              success: '#10b981', // Emerald for security/pass
+              // Cyberpunk specific
+              'cp-yellow': '#FCEE0A',
+              'cp-blue': '#00F0FF',
+              'cp-red': '#FF003C',
+              'cp-bg': '#0b0b0b',
+            },
+            backgroundImage: {
+              'grid-pattern': "linear-gradient(to right, #1f1f1f 1px, transparent 1px), linear-gradient(to bottom, #1f1f1f 1px, transparent 1px)",
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #e5e5e5;
+        overflow-x: hidden;
+        transition: background-color 0.5s ease;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .text-gradient {
+        background: linear-gradient(to right, #ffffff, #a3a3a3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* =========================================
+         CYBERPUNK 2077 OVERHAUL MODE
+         ======================================== */
+      
+      /* Global Reset for CP Mode */
+      body.cyberpunk-mode {
+        background-color: #050505;
+        color: #fcee0a; /* Cyber Yellow */
+        font-family: 'Rajdhani', sans-serif;
+        cursor: crosshair;
+      }
+
+      body.cyberpunk-mode * {
+        border-radius: 0 !important;
+      }
+      
+      /* Typography Overrides */
+      body.cyberpunk-mode h1, 
+      body.cyberpunk-mode h2, 
+      body.cyberpunk-mode h3 {
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: none;
+      }
+
+      body.cyberpunk-mode h1 {
+        text-shadow: 2px 0px 0px rgba(255,0,60,0.5), -2px 0px 0px rgba(0,240,255,0.5);
+      }
+
+      body.cyberpunk-mode p,
+      body.cyberpunk-mode span,
+      body.cyberpunk-mode div {
+        font-weight: 500;
+      }
+
+      body.cyberpunk-mode .text-secondary {
+        color: #00f0ff !important; /* Holo Blue */
+        font-family: 'JetBrains Mono', monospace;
+      }
+      
+      body.cyberpunk-mode .text-success {
+        color: #ff003c !important; /* Acid Red */
+      }
+      
+      body.cyberpunk-mode nav {
+        background: rgba(10,10,10,0.98) !important;
+        border-bottom: 1px solid #fcee0a !important;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+      }
+
+      /* =========================================
+         CYBERPUNK CARD ARCHITECTURE
+         ======================================== */
+      body.cyberpunk-mode .glass,
+      body.cyberpunk-mode .bg-white\/\[0\.02\], 
+      body.cyberpunk-mode .bg-surface\/30 {
+        background: rgba(10, 10, 10, 0.95) !important;
+        /* Remove default border */
+        border: none !important;
+        box-shadow: none !important;
+        
+        /* Define the shape */
+        clip-path: polygon(
+          0 0, 
+          100% 0, 
+          100% calc(100% - 26px), 
+          calc(100% - 26px) 100%, 
+          0 100%
+        );
+        position: relative;
+        padding: 2rem; /* Ensure padding for content */
+        margin-bottom: 2rem;
+      }
+
+      /* Drawing borders using linear-gradients to prevent 'disconnected' look */
+      body.cyberpunk-mode .glass::after,
+      body.cyberpunk-mode .bg-white\/\[0\.02\]::after,
+      body.cyberpunk-mode .bg-surface\/30::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none;
+        z-index: 50;
+        
+        /* 
+           1. Top Border
+           2. Left Border
+           3. Right Border (stops before cut)
+           4. Bottom Border (stops before cut)
+           5. Diagonal Border
+        */
+        background: 
+          /* Top */
+          linear-gradient(to right, #fcee0a, #fcee0a) 0 0 / 100% 1px no-repeat,
+          /* Left */
+          linear-gradient(to bottom, #fcee0a, #fcee0a) 0 0 / 1px 100% no-repeat,
+          /* Right (minus 20px) */
+          linear-gradient(to bottom, #fcee0a, #fcee0a) 100% 0 / 1px calc(100% - 20px) no-repeat,
+          /* Bottom (minus 20px) */
+          linear-gradient(to right, #fcee0a, #fcee0a) 0 100% / calc(100% - 20px) 1px no-repeat,
+          /* Diagonal - simulated with a gradient line */
+          linear-gradient(135deg, transparent 48%, #fcee0a 48%, #fcee0a 52%, transparent 52%) 
+          100% 100% / 28px 28px no-repeat; /* 20px * sqrt(2) approx width needed for coverage */
+      }
+      
+      /* Hover State for Cards */
+      body.cyberpunk-mode .glass:hover::after,
+      body.cyberpunk-mode .bg-white\/\[0\.02\]:hover::after {
+         background: 
+          linear-gradient(to right, #00f0ff, #00f0ff) 0 0 / 100% 1px no-repeat,
+          linear-gradient(to bottom, #00f0ff, #00f0ff) 0 0 / 1px 100% no-repeat,
+          linear-gradient(to bottom, #00f0ff, #00f0ff) 100% 0 / 1px calc(100% - 20px) no-repeat,
+          linear-gradient(to right, #00f0ff, #00f0ff) 0 100% / calc(100% - 20px) 1px no-repeat,
+          linear-gradient(135deg, transparent 48%, #00f0ff 48%, #00f0ff 52%, transparent 52%) 
+          100% 100% / 28px 28px no-repeat;
+      }
+
+      body.cyberpunk-mode .glass:hover,
+      body.cyberpunk-mode .bg-white\/\[0\.02\]:hover {
+        background: rgba(0, 20, 30, 0.95) !important;
+        transform: translate(-1px, -1px);
+      }
+      
+      /* Decorative "R-2077" Label */
+      body.cyberpunk-mode .glass::before,
+      body.cyberpunk-mode .bg-white\/\[0\.02\]::before {
+        content: "CP-77";
+        position: absolute;
+        bottom: 2px;
+        right: 30px;
+        font-family: 'JetBrains Mono';
+        font-size: 8px;
+        color: #fcee0a;
+        opacity: 0.5;
+        z-index: 51;
+      }
+
+      body.cyberpunk-mode ::selection {
+        background: #ff003c;
+        color: #fff;
+      }
+
+      /* Buttons & Links */
+      body.cyberpunk-mode a, 
+      body.cyberpunk-mode button {
+        font-family: 'Orbitron', sans-serif;
+      }
+
+      /* =========================================
+         NULL BYTE TERMINAL OVERHAUL (NETRUNNER STYLE)
+         ======================================== */
+      body.cyberpunk-mode .null-byte-terminal {
+        background: #000000 !important;
+        border: 2px solid #ff003c !important; /* Force Red Border */
+        box-shadow: 0 0 20px rgba(255, 0, 60, 0.15) !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        clip-path: none !important; /* No angled cuts for terminal */
+        position: relative;
+        overflow: hidden !important;
+        padding: 0 !important;
+      }
+      
+      /* Use a pseudo element to create scanlines specific to terminal */
+      body.cyberpunk-mode .null-byte-terminal::before {
+        content: "";
+        position: absolute;
+        top:0; left:0; width:100%; height:100%;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+      
+      /* Terminal Header Transformation */
+      body.cyberpunk-mode .terminal-header {
+        background: #ff003c !important;
+        border-bottom: 2px solid #ff003c !important;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+      }
+      
+      /* Hide Mac Buttons */
+      body.cyberpunk-mode .window-btn {
+        display: none !important;
+      }
+      
+      /* Inject Custom Header Text */
+      body.cyberpunk-mode .terminal-header::after {
+        content: "NETWATCH_SENSORY_DATA // OVERRIDE_ACTIVE";
+        color: #000;
+        font-weight: 900;
+        font-size: 11px;
+        letter-spacing: 1px;
+        font-family: 'Orbitron', sans-serif;
+      }
+      
+      body.cyberpunk-mode .terminal-title {
+        display: none;
+      }
+
+      /* Inner Text Coloring */
+      body.cyberpunk-mode .null-byte-terminal .text-gray-400,
+      body.cyberpunk-mode .null-byte-terminal .text-gray-500,
+      body.cyberpunk-mode .null-byte-terminal .text-gray-300,
+      body.cyberpunk-mode .null-byte-terminal a {
+        color: #00f0ff !important; /* Neon Blue Text */
+        text-shadow: 0 0 2px rgba(0, 240, 255, 0.5);
+        font-family: 'JetBrains Mono';
+        font-size: 12px;
+      }
+
+      /* Hover states for terminal links */
+      body.cyberpunk-mode .null-byte-terminal a:hover {
+        background: #ff003c !important;
+        color: #000 !important;
+        box-shadow: 0 0 10px #ff003c;
+      }
+      
+      body.cyberpunk-mode .null-byte-terminal a:hover * {
+        color: #000 !important;
+        text-shadow: none !important;
+      }
+
+      body.cyberpunk-mode .prompt {
+        color: #fcee0a !important; /* Yellow Prompt */
+      }
+      body.cyberpunk-mode .path {
+        color: #ff003c !important; /* Red Path */
+      }
+
+      /* =========================================
+         FOOTER OVERLAP FIX FOR CP MODE
+         ======================================== */
+      body.cyberpunk-mode footer h2 {
+        font-size: 2.5rem !important; /* Scale down heading */
+        line-height: 1.2;
+      }
+      
+      body.cyberpunk-mode footer .text-lg {
+        font-size: 1rem !important;
+      }
+      
+      /* Force column layout on smaller screens inside footer if needed or add padding */
+      body.cyberpunk-mode footer .grid {
+        gap: 2rem !important; /* Increase gap clarity */
+      }
+
+      /* =========================================
+         EFFECTS
+         ======================================== */
+      /* Scanline Effect Overlay - Global */
+      .scanlines {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.1) 50%,
+          rgba(0,0,0,0.1)
+        );
+        background-size: 100% 3px;
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.3;
+      }
+
+      .noise-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+        background: url('https://grainy-gradients.vercel.app/noise.svg');
+        opacity: 0.05;
+        mix-blend-mode: overlay;
+      }
+      body.cyberpunk-mode .noise-overlay {
+        opacity: 0.12;
+      }
+
+      @keyframes twinkle {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.5); }
+      }
+      .animate-twinkle {
+        animation: twinkle 3s infinite ease-in-out;
+      }
+
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/v2/assets/index-DSlY5xbL.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="noise-overlay"></div>
+</body>
+</html>
